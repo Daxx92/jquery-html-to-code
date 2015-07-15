@@ -8,34 +8,29 @@
 
 	$.fn.htmlToCode = function( options ) {
 
-		//Code to append to the element
-		var template = '<pre><code></code></pre>';
+		//Needed to identify where to append the code, can be anything jQuery can select
+		var target = '.code'; 
+		//HTML that will be appended to parent element
+		var template = '<pre><code class="code"></code></pre>';
 
 		//Default settings
 		var settings = $.extend({
-			classes: null,  //Classes to add to the rendered pre
-			callback: null, //Function callback
+			target: target, //Where to put the HTML in
+			template: template //What to wrap the HTML code in
 		}, options);
 
-		//Loop through the elements
+		//Loop through the elements and return it to allow method chaining
 		return this.each( function() {
 			//Save the element for future reference
 			var $this = $( this );
 			//Get the HTML, ONLY what's inside the element
 			var html = $this.html();
-			//Append the template (pre>code)
-			$this.append( template )
-			//Save pre reference
-			var $pre = $this.find('pre');
-			//Save code reference
-			var $code = $this.find('code');
-			//Set code content to be the escaped HTML
-			$code.text( html );
 
-			//If any classes are defined, add them
-			if ( settings.classes ) {
-				$(this).find('pre').addClass( settings.classes );
-			}
+			//Append the template
+			$this.append( settings.template )
+
+			//Find target and add the code as escaped HTML
+			var $target = $this.find( settings.target ).text( html );
 
 			//If a callback was passed, call it
 			if ( $.isFunction( settings.callback ) ) {
