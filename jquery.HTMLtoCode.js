@@ -6,12 +6,12 @@
  */
 (function($) {
 
-	$.fn.htmlToCode = function( options ) {
+	$.fn.HTMLtoCode = function( options ) {
 
 		//Needed to identify where to append the code, can be anything jQuery can select
-		var target = '.code'; 
+		var target = '.html-to-code'; 
 		//HTML that will be appended to parent element
-		var template = '<pre><code class="code"></code></pre>';
+		var template = '<pre><code class="html-to-code"></code></pre>';
 
 		//Default settings
 		var settings = $.extend({
